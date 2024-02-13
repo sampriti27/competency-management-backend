@@ -5,11 +5,17 @@ import cors from "cors";
 //function imports
 import { connection } from "./postgresql.js";
 
+//route imports
+import authRoutes from "./routes/authRoutes.js"; 
+
 const app = express();
 
 //middlewares
 app.use(cors());
 app.use(express.json());
+
+//routes
+app.use("/api/v1/auth", authRoutes);
 
 
 

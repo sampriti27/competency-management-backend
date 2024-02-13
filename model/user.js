@@ -32,3 +32,5 @@ export const userModel = (sequelize) => {
         }
     });
 }
+
+export const User = userModel;
