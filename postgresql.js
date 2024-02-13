@@ -1,5 +1,6 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize } from 'sequelize';
 import { userModel } from './model/user.js';
+
 const database = "cms";
 const username = "cms";
 const password = "1234";
