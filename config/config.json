@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "cms",
+    "password": "1234",
+    "database": "testDb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "cms",
+    "password": "1234",
+    "database": "testDb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "cms",
+    "password": "1234",
+    "database": "testDb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
