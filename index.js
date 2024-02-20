@@ -2,8 +2,12 @@
 const express = require('express');
 const db = require("./models/index");
 const cors = require("cors");
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 
 
+//config dotenv
+dotenv.config();
 
 //route imports
 const authRoutes = require("./routes/authRoutes");
@@ -16,6 +20,12 @@ db.isConnected();
 //middlewares
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
+//main api end-point
+app.get('/', (req, res) => {
+    res.json({message: "this is the main api end-point!"});
+})
 
 //routes
 app.use("/api/v1/auth", authRoutes);

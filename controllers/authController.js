@@ -5,6 +5,12 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const createToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+  };
+  
+  //***************Register controller************************
+
 const registerUser = async(req, res) => {
 
     const {firstName, lastName, phone, email, password} = req.body;
@@ -54,6 +60,8 @@ const registerUser = async(req, res) => {
 
 }
 
+//************Login controller*********************
+
 const loginUser = async(req, res) => {
 
     const {email, password} = req.body;
@@ -80,10 +88,43 @@ const loginUser = async(req, res) => {
 
 
     //generate token
-
+    const access_token = createToken(existingUser.id);  
+    console.log(access_token);
+    
     //set token in cookie
+    res.cookie('accessToken', access_token,{
+        maxAge: 1000*60*60*24*30,
+        httpOnly: true,
+        sameSite: "none",
+        secure: true
+    })
 
     //login successful
+    res.status(200).json({auth: true, message: "login sucessfull!", existingUser});
+
+    
 }
 
-module.exports = {registerUser, loginUser};
+//**************** Logout controller **************************8
+
+const logoutUser = async(req, res) => {
+
+    //find user by id
+    // console.log(req);
+    const user = await User.findOne({where: {id: req.user.id}});
+    // console.log(user);
+
+    if(!user){
+        res.status(401).json({message: "you are not allowed to perform this action!"});
+    }
+    
+    //delete cookies
+    res.clearCookie('accessToken', {sameSite: "none", secure: true});
+
+    res.status(200).json({
+        auth: false,
+        user: null
+    })
+}
+
+module.exports = {registerUser, loginUser, logoutUser};
