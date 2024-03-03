@@ -2,29 +2,24 @@ const express = require("express");
 const userAuth = require("../middlewares/authMiddleware");
 const userRole = require("../middlewares/roleMiddleware");
 
+const {addProject, getAllProjects, getProject, updateProject, deleteProject} = require("../controllers/projectController");
+
 //router object
 const router = express.Router();
 
 //ADD PROJECT || POST
-router.post("/", userAuth, userRole, (req, res) => {
-    res.json("This is add project route!");
-})
+router.post("/", userAuth, userRole, addProject);
 
 //GET ALL PROJECTS || GET
-router.get("/", userAuth, (req, res) => {
-    res.json("This is get all projects route!");
-})
+router.get("/", userAuth, getAllProjects);
+
 //GET A SINGLE PROJECT || GET
-router.get("/:id", userAuth, (req, res) => {
-    res.json("This is get a single project route!");
-})
+router.get("/:id", userAuth, getProject);
+
 //UPDATE PROJECT || PUT
-router.put("/:id", userAuth, userRole, (req, res) => {
-    res.json("This is update project route!");
-})
+router.put("/:id", userAuth, userRole, updateProject);
+
 //DELETE PROJECT || DELETE
-router.delete("/:id", userAuth, userRole, (req, res) => {
-    res.json("This is delete project route!");
-})
+router.delete("/:id", userAuth, userRole, deleteProject);
 
 module.exports = router;
