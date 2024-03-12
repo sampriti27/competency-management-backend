@@ -12,6 +12,7 @@ dotenv.config();
 //route imports
 const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const skillRoutes = require("./routes/skillRoutes");
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 //routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/project", projectRoutes);
-
+app.use("/api/v1/skills", skillRoutes);
 
 
 app.listen (8800, ()=>{
